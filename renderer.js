@@ -128,7 +128,11 @@ function handleMenuAction(action) {
             break;
         case 'select-all':
             if (editor) {
-                editor.select();
+                const range = document.createRange();
+                range.selectNodeContents(editor);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
             }
             break;
         case 'find':
@@ -145,6 +149,21 @@ function handleMenuAction(action) {
             break;
         case 'clear-history':
             clearHistory();
+            break;
+        case 'bold':
+            toggleBold();
+            break;
+        case 'italic':
+            toggleItalic();
+            break;
+        case 'underline':
+            toggleUnderline();
+            break;
+        case 'text-color':
+            document.getElementById('text-color-picker')?.click();
+            break;
+        case 'clear-format':
+            clearFormat();
             break;
     }
 }
@@ -340,11 +359,12 @@ function createTabFromData(data) {
     tabEl.onclick = () => switchTab(tabId);
     tabsContainer.appendChild(tabEl);
 
-    const editorEl = document.createElement('textarea');
+    const editorEl = document.createElement('div');
     editorEl.className = 'editor';
     editorEl.dataset.tabId = tabId;
-    editorEl.placeholder = 'Escribe aquí...';
-    editorEl.value = data.content;
+    editorEl.contentEditable = 'true';
+    editorEl.dataset.placeholder = 'Escribe aquí...';
+    editorEl.innerHTML = data.content || '';
     editorEl.addEventListener('input', () => handleEditorInput(tabId, editorEl));
     editorContainer.appendChild(editorEl);
 
@@ -380,11 +400,12 @@ function newTab(fileName = 'Sin título', content = '', filePath = null) {
     tabEl.onclick = () => switchTab(tabId);
     tabsContainer.appendChild(tabEl);
 
-    const editorEl = document.createElement('textarea');
+    const editorEl = document.createElement('div');
     editorEl.className = 'editor';
     editorEl.dataset.tabId = tabId;
-    editorEl.placeholder = 'Escribe aquí...';
-    editorEl.value = content;
+    editorEl.contentEditable = 'true';
+    editorEl.dataset.placeholder = 'Escribe aquí...';
+    editorEl.innerHTML = content || '';
     editorEl.addEventListener('input', () => handleEditorInput(tabId, editorEl));
     editorContainer.appendChild(editorEl);
 
@@ -400,12 +421,13 @@ function newTab(fileName = 'Sin título', content = '', filePath = null) {
 function handleEditorInput(tabId, editorEl) {
     const t = getTab(tabId);
     if (t) {
-        t.content = editorEl.value;
-        t.isModified = editorEl.value !== t.originalContent;
+        t.content = editorEl.innerHTML;
+        t.isModified = editorEl.innerHTML !== t.originalContent;
         updateTabUI(tabId);
         if (tabId === activeTabId) {
             updateCounts();
             updateModifiedIndicator();
+            updateToolbarState();
         }
         saveSession();
     }
@@ -486,7 +508,7 @@ function closeTab(tabId) {
 // ============ UI UPDATES ============
 function updateCounts() {
     const editor = getActiveEditor();
-    const text = editor ? editor.value : '';
+    const text = editor ? editor.innerText || editor.textContent : '';
     const lines = text.split('\n').length;
     const words = text.trim() ? text.trim().split(/\s+/).length : 0;
     const chars = text.length;
@@ -521,6 +543,67 @@ function showToast(message) {
     toast.textContent = message;
     toast.classList.add('visible');
     setTimeout(() => toast.classList.remove('visible'), 2000);
+}
+
+// ============ TEXT FORMATTING ============
+function applyFormat(command, value = null) {
+    const editor = getActiveEditor();
+    if (!editor) return;
+
+    editor.focus();
+    document.execCommand(command, false, value);
+    handleEditorInput(activeTabId, editor);
+    updateToolbarState();
+}
+
+function toggleBold() {
+    applyFormat('bold');
+}
+
+function toggleItalic() {
+    applyFormat('italic');
+}
+
+function toggleUnderline() {
+    applyFormat('underline');
+}
+
+function setTextColor(color) {
+    applyFormat('foreColor', color);
+    document.getElementById('color-indicator').style.background = color;
+}
+
+function clearFormat() {
+    applyFormat('removeFormat');
+}
+
+function updateToolbarState() {
+    const btnBold = document.getElementById('btn-bold');
+    const btnItalic = document.getElementById('btn-italic');
+    const btnUnderline = document.getElementById('btn-underline');
+
+    if (btnBold) btnBold.classList.toggle('active', document.queryCommandState('bold'));
+    if (btnItalic) btnItalic.classList.toggle('active', document.queryCommandState('italic'));
+    if (btnUnderline) btnUnderline.classList.toggle('active', document.queryCommandState('underline'));
+}
+
+function initFormatToolbar() {
+    document.getElementById('btn-bold')?.addEventListener('click', toggleBold);
+    document.getElementById('btn-italic')?.addEventListener('click', toggleItalic);
+    document.getElementById('btn-underline')?.addEventListener('click', toggleUnderline);
+    document.getElementById('btn-clear-format')?.addEventListener('click', clearFormat);
+
+    const colorPicker = document.getElementById('text-color-picker');
+    if (colorPicker) {
+        colorPicker.addEventListener('input', (e) => {
+            setTextColor(e.target.value);
+        });
+    }
+
+    // Update toolbar state on selection change
+    document.addEventListener('selectionchange', () => {
+        updateToolbarState();
+    });
 }
 
 // ============ FILE OPERATIONS ============
@@ -584,18 +667,15 @@ function findText() {
     if (!editor) return;
     const searchTerm = prompt('Buscar:');
     if (searchTerm) {
-        const index = editor.value.indexOf(searchTerm, editor.selectionEnd);
-        if (index !== -1) {
-            editor.focus();
-            editor.selectionStart = index;
-            editor.selectionEnd = index + searchTerm.length;
-        } else {
-            const indexFromStart = editor.value.indexOf(searchTerm);
-            if (indexFromStart !== -1) {
-                editor.focus();
-                editor.selectionStart = indexFromStart;
-                editor.selectionEnd = indexFromStart + searchTerm.length;
-            } else {
+        editor.focus();
+        // Use window.find for searching in contenteditable
+        const found = window.find(searchTerm, false, false, true, false, false, false);
+        if (!found) {
+            // Try from the beginning
+            const selection = window.getSelection();
+            selection.collapse(editor, 0);
+            const foundFromStart = window.find(searchTerm, false, false, true, false, false, false);
+            if (!foundFromStart) {
                 showToast('No se encontró el texto');
             }
         }
@@ -609,9 +689,23 @@ function replaceText() {
     if (searchTerm) {
         const replaceTerm = prompt('Reemplazar con:');
         if (replaceTerm !== null) {
-            editor.value = editor.value.replaceAll(searchTerm, replaceTerm);
-            editor.dispatchEvent(new Event('input'));
-            showToast('Reemplazo completado');
+            const text = editor.innerText;
+            // Preserve HTML formatting when replacing
+            const walker = document.createTreeWalker(editor, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            let replaced = false;
+            while (node = walker.nextNode()) {
+                if (node.textContent.includes(searchTerm)) {
+                    node.textContent = node.textContent.replaceAll(searchTerm, replaceTerm);
+                    replaced = true;
+                }
+            }
+            if (replaced) {
+                handleEditorInput(activeTabId, editor);
+                showToast('Reemplazo completado');
+            } else {
+                showToast('No se encontró el texto');
+            }
         }
     }
 }
@@ -685,7 +779,7 @@ function restoreSelected() {
     if (entry) {
         addToHistory(tab.id, tab.content, tab.fileName);
 
-        editor.value = entry.content;
+        editor.innerHTML = entry.content;
         tab.content = entry.content;
         tab.isModified = entry.content !== tab.originalContent;
         updateTabUI(tab.id);
@@ -815,6 +909,23 @@ document.addEventListener('keydown', (e) => {
                 e.preventDefault();
                 showHistory();
                 break;
+            // Format shortcuts
+            case 'b':
+                e.preventDefault();
+                toggleBold();
+                break;
+            case 'i':
+                e.preventDefault();
+                toggleItalic();
+                break;
+            case 'u':
+                e.preventDefault();
+                toggleUnderline();
+                break;
+            case '\\':
+                e.preventDefault();
+                clearFormat();
+                break;
         }
     }
 });
@@ -832,6 +943,7 @@ if (!loadSession()) {
 }
 updateAutosaveStatus();
 initMenu();
+initFormatToolbar();
 
 // Load initial menu data
 if (window.electronAPI) {

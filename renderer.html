@@ -56,6 +56,18 @@
                     <div class="menu-option" data-action="replace">Reemplazar... <span class="shortcut">⌘H</span></div>
                 </div>
             </div>
+            <div class="menu-item" data-menu="formato">
+                <span class="menu-label">Formato</span>
+                <div class="menu-dropdown" id="menu-formato">
+                    <div class="menu-option" data-action="bold">Negrita <span class="shortcut">⌘B</span></div>
+                    <div class="menu-option" data-action="underline">Subrayado <span class="shortcut">⌘U</span></div>
+                    <div class="menu-option" data-action="italic">Cursiva <span class="shortcut">⌘I</span></div>
+                    <div class="menu-separator"></div>
+                    <div class="menu-option" data-action="text-color">Color de texto...</div>
+                    <div class="menu-separator"></div>
+                    <div class="menu-option" data-action="clear-format">Limpiar formato <span class="shortcut">⌘\</span></div>
+                </div>
+            </div>
             <div class="menu-item" data-menu="historial">
                 <span class="menu-label">Historial</span>
                 <div class="menu-dropdown" id="menu-historial">
@@ -65,6 +77,35 @@
                     <div class="menu-option" data-action="clear-history">Limpiar historial</div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Format Toolbar -->
+    <div class="format-toolbar" id="format-toolbar">
+        <div class="toolbar-group">
+            <button class="toolbar-btn" id="btn-bold" title="Negrita (⌘B)">
+                <strong>B</strong>
+            </button>
+            <button class="toolbar-btn" id="btn-italic" title="Cursiva (⌘I)">
+                <em>I</em>
+            </button>
+            <button class="toolbar-btn" id="btn-underline" title="Subrayado (⌘U)">
+                <u>U</u>
+            </button>
+        </div>
+        <div class="toolbar-separator"></div>
+        <div class="toolbar-group">
+            <label class="toolbar-color" title="Color de texto">
+                <span class="color-icon">A</span>
+                <input type="color" id="text-color-picker" value="#000000">
+                <span class="color-indicator" id="color-indicator"></span>
+            </label>
+        </div>
+        <div class="toolbar-separator"></div>
+        <div class="toolbar-group">
+            <button class="toolbar-btn" id="btn-clear-format" title="Limpiar formato (⌘\)">
+                ⌀
+            </button>
         </div>
     </div>
 
