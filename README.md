@@ -39,7 +39,7 @@ Switched from Windows to Mac and miss the simplicity of Notepad? **TextEdit** is
 **Notepad for macOS** is exactly that:
 
 - ⚡ **Instant startup** — no splash screens, no loading
-- 📝 **Plain text focused** — no formatting, no distractions
+- 🎨 **Text formatting** — bold, italic, underline, and colors
 - 🪶 **Lightweight** — under 5MB, uses minimal resources
 - 🍎 **Native macOS feel** — designed for your Mac
 
@@ -53,7 +53,21 @@ Switched from Windows to Mac and miss the simplicity of Notepad? **TextEdit** is
 
 **Requirements:** macOS 10.15 (Catalina) or later
 
-> 💡 **Tip:** After downloading, drag Notepad to your Applications folder. If macOS blocks the app, right-click and select "Open".
+### ⚠️ First Launch on macOS
+
+Since this app is not signed with an Apple Developer certificate, macOS may show a warning. To open the app:
+
+**Option 1 (Recommended):**
+1. Right-click on **Notepad.app**
+2. Select **"Open"** from the menu
+3. Click **"Open"** in the dialog that appears
+
+**Option 2 (Terminal):**
+```bash
+xattr -cr /Applications/Notepad.app
+```
+
+> This only needs to be done once. After that, the app will open normally.
 
 ## ✨ Features
 
@@ -71,6 +85,9 @@ Every change is saved. Browse and restore any previous version of your document.
 
 ### 💾 Auto-Save
 Never lose your work. Sessions persist even after closing the app.
+
+### 🎨 Text Formatting (v1.1.0)
+Format your text with **bold**, *italic*, <u>underline</u>, and custom colors. Quick toolbar access or keyboard shortcuts.
 
 ### ⌨️ Keyboard First
 Full keyboard shortcut support for power users. Work faster without touching the mouse.
@@ -98,6 +115,10 @@ Full keyboard shortcut support for power users. Work faster without touching the
 | View History | `⌘ Y` |
 | Undo | `⌘ Z` |
 | Redo | `⇧⌘ Z` |
+| **Bold** | `⌘ B` |
+| **Italic** | `⌘ I` |
+| **Underline** | `⌘ U` |
+| Clear Format | `⌘ \` |
 
 ## 📦 Installation
 
@@ -156,5 +177,5 @@ MIT © [Martín Santos](https://github.com/martinsantos)
 </p>
 
 <p align="center">
-  <sub>Keywords: notepad mac, notepad macos, notepad for mac, simple text editor mac, lightweight text editor macos, plain text editor mac, windows notepad alternative mac, fast text editor macos, minimal text editor mac, notepad replacement macos</sub>
+  <sub>Keywords: notepad mac, notepad macos, notepad for mac, simple text editor mac, lightweight text editor macos, rich text editor mac, windows notepad alternative mac, fast text editor macos, minimal text editor mac, notepad replacement macos, text formatting mac, bold italic underline editor</sub>
 </p>
