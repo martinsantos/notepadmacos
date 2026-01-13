@@ -1,8 +1,32 @@
 {
-  "name": "notepad",
+  "name": "notepad-macos",
   "version": "1.0.0",
-  "description": "Editor de texto simple y ligero para macOS",
+  "description": "A lightweight, fast text editor for macOS. Simple Notepad alternative with tabs, pinned files, version history and auto-save.",
   "main": "main.js",
+  "homepage": "https://github.com/martinsantos/notepadmacos",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martinsantos/notepadmacos.git"
+  },
+  "bugs": {
+    "url": "https://github.com/martinsantos/notepadmacos/issues"
+  },
+  "keywords": [
+    "notepad",
+    "macos",
+    "text-editor",
+    "editor",
+    "lightweight",
+    "simple",
+    "plain-text",
+    "electron",
+    "mac",
+    "osx",
+    "productivity",
+    "notes",
+    "tabs",
+    "auto-save"
+  ],
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
@@ -11,7 +35,11 @@
     "build:dmg": "electron-builder --mac dmg",
     "build:zip": "electron-builder --mac zip"
   },
-  "author": "santosma",
+  "author": {
+    "name": "Martín Santos",
+    "email": "santosma@gmail.com",
+    "url": "https://github.com/martinsantos"
+  },
   "license": "MIT",
   "devDependencies": {
     "electron": "^28.0.0",
@@ -19,7 +47,7 @@
     "sharp": "^0.34.5"
   },
   "build": {
-    "appId": "com.santosma.notepad",
+    "appId": "com.martinsantos.notepad",
     "productName": "Notepad",
     "mac": {
       "category": "public.app-category.productivity",

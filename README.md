@@ -1,139 +1,160 @@
 # Notepad for macOS
 
 <p align="center">
-  <img src="assets/icon.png" alt="Notepad Logo" width="128" height="128">
+  <img src="assets/icon.png" alt="Notepad for macOS - Lightweight Text Editor" width="128" height="128">
+</p>
+
+<h3 align="center">The Simple, Fast Text Editor You've Been Missing on Mac</h3>
+
+<p align="center">
+  <strong>Finally, a lightweight Notepad alternative for macOS — just like the one you loved on Windows.</strong>
 </p>
 
 <p align="center">
-  <strong>Un editor de texto simple, rápido y ligero para macOS</strong>
+  <a href="https://github.com/martinsantos/notepadmacos/releases/latest">
+    <img src="https://img.shields.io/github/v/release/martinsantos/notepadmacos?style=for-the-badge&color=007AFF" alt="Latest Release">
+  </a>
+  <a href="https://github.com/martinsantos/notepadmacos/releases">
+    <img src="https://img.shields.io/github/downloads/martinsantos/notepadmacos/total?style=for-the-badge&color=34C759" alt="Downloads">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/github/license/martinsantos/notepadmacos?style=for-the-badge" alt="License MIT">
+  </a>
 </p>
 
 <p align="center">
-  <a href="#características">Características</a> •
-  <a href="#instalación">Instalación</a> •
-  <a href="#uso">Uso</a> •
-  <a href="#atajos-de-teclado">Atajos</a> •
-  <a href="#desarrollo">Desarrollo</a>
+  <a href="#-download">Download</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-screenshots">Screenshots</a> •
+  <a href="#-keyboard-shortcuts">Shortcuts</a> •
+  <a href="#-installation">Installation</a>
 </p>
 
 ---
 
-## Características
+## 🚀 Why Notepad for macOS?
 
-- **Ligero y rápido** - Inicia instantáneamente, sin demoras
-- **Múltiples pestañas** - Trabaja con varios archivos a la vez
-- **Archivos fijados 📌** - Mantén tus archivos favoritos siempre accesibles
-- **Archivos recientes** - Acceso rápido a los últimos 30 documentos
-- **Historial de cambios** - Vuelve a cualquier versión anterior de tu documento
-- **Auto-guardado** - Nunca pierdas tu trabajo
-- **Persistencia de sesión** - Recupera tus pestañas al reiniciar la app
-- **Integración con Dock** - Archivos recientes accesibles desde el Dock de macOS
-- **Diseño nativo** - Interfaz que se siente como parte de macOS
+Switched from Windows to Mac and miss the simplicity of Notepad? **TextEdit** is bloated. **VS Code** is overkill for quick notes. You just want a **fast, simple text editor** that opens instantly and gets out of your way.
 
-## Instalación
+**Notepad for macOS** is exactly that:
 
-### Opción 1: Descargar DMG (Recomendado)
+- ⚡ **Instant startup** — no splash screens, no loading
+- 📝 **Plain text focused** — no formatting, no distractions
+- 🪶 **Lightweight** — under 5MB, uses minimal resources
+- 🍎 **Native macOS feel** — designed for your Mac
 
-1. Ve a [Releases](https://github.com/martinsantos/notepadmacos/releases)
-2. Descarga el archivo `.dmg` más reciente
-3. Abre el DMG y arrastra Notepad a tu carpeta Aplicaciones
-4. ¡Listo!
+## 📥 Download
 
-### Opción 2: Desde el código fuente
+<p align="center">
+  <a href="https://github.com/martinsantos/notepadmacos/releases/latest/download/Notepad.dmg">
+    <img src="https://img.shields.io/badge/Download-DMG%20for%20macOS-007AFF?style=for-the-badge&logo=apple&logoColor=white" alt="Download DMG">
+  </a>
+</p>
+
+**Requirements:** macOS 10.15 (Catalina) or later
+
+> 💡 **Tip:** After downloading, drag Notepad to your Applications folder. If macOS blocks the app, right-click and select "Open".
+
+## ✨ Features
+
+### 📑 Multiple Tabs
+Work with several files at once. Open, edit, and switch between documents seamlessly.
+
+### 📌 Pinned Files
+Keep your most-used files always accessible. Pin important documents for one-click access.
+
+### 🕐 Recent Files (Last 30)
+Quickly reopen recent documents. Also accessible from the macOS Dock menu.
+
+### ⏮️ Version History
+Every change is saved. Browse and restore any previous version of your document.
+
+### 💾 Auto-Save
+Never lose your work. Sessions persist even after closing the app.
+
+### ⌨️ Keyboard First
+Full keyboard shortcut support for power users. Work faster without touching the mouse.
+
+## 📸 Screenshots
+
+<p align="center">
+  <i>Clean, minimal interface focused on your text</i>
+</p>
+
+<!-- Add screenshots here when available -->
+
+## ⌨️ Keyboard Shortcuts
+
+| Action | Shortcut |
+|--------|----------|
+| New Document | `⌘ N` |
+| New Tab | `⌘ T` |
+| Open File | `⌘ O` |
+| Save | `⌘ G` |
+| Save As | `⇧⌘ G` |
+| Close Tab | `⌘ W` |
+| Find | `⌘ F` |
+| Find & Replace | `⌘ H` |
+| View History | `⌘ Y` |
+| Undo | `⌘ Z` |
+| Redo | `⇧⌘ Z` |
+
+## 📦 Installation
+
+### Option 1: Download DMG (Recommended)
+
+1. [Download the latest DMG](https://github.com/martinsantos/notepadmacos/releases/latest)
+2. Open the DMG file
+3. Drag **Notepad** to your **Applications** folder
+4. Done! Launch from Applications or Spotlight
+
+### Option 2: Build from Source
 
 ```bash
-# Clonar el repositorio
+# Clone the repository
 git clone https://github.com/martinsantos/notepadmacos.git
 cd notepadmacos
 
-# Instalar dependencias
+# Install dependencies
 npm install
 
-# Ejecutar en modo desarrollo
+# Run in development mode
 npm start
 
-# Compilar app nativa
+# Build the app
 npm run build
 ```
 
-## Uso
+## 🛠️ Tech Stack
 
-### Menú de archivo
+Built with modern technologies:
 
-- **Nuevo** (⌘N) - Crea un documento nuevo
-- **Nueva pestaña** (⌘T) - Abre una nueva pestaña
-- **Abrir** (⌘O) - Abre un archivo existente
-- **📌 Fijados** - Accede a tus archivos fijados
-- **Recientes** - Accede a archivos abiertos recientemente
-- **Guardar** (⌘G) - Guarda el documento actual
-- **Guardar como** (⇧⌘G) - Guarda con un nuevo nombre
-- **📌 Fijar archivo** - Fija el archivo actual para acceso rápido
-- **Mostrar en Finder** - Abre la ubicación del archivo
+- **Electron** — Cross-platform desktop framework
+- **Vanilla JavaScript** — No heavy frameworks, maximum performance
+- **Native macOS APIs** — Dock integration, file associations
 
-### Historial
+## 🤝 Contributing
 
-Cada cambio en tu documento se guarda automáticamente en el historial. Puedes:
+Contributions are welcome! Feel free to:
 
-- Ver el historial completo (⌘Y)
-- Restaurar cualquier versión anterior
-- Exportar el historial a un archivo
-- Limpiar el historial
+- 🐛 Report bugs
+- 💡 Suggest features
+- 🔧 Submit pull requests
 
-## Atajos de teclado
-
-| Acción | Atajo |
-|--------|-------|
-| Nuevo documento | ⌘N |
-| Nueva pestaña | ⌘T |
-| Abrir archivo | ⌘O |
-| Guardar | ⌘G |
-| Guardar como | ⇧⌘G |
-| Cerrar pestaña | ⌘W |
-| Buscar | ⌘F |
-| Reemplazar | ⌘H |
-| Ver historial | ⌘Y |
-| Deshacer | ⌘Z |
-| Rehacer | ⇧⌘Z |
-
-## Desarrollo
-
-### Requisitos
-
-- Node.js 18+
-- npm 9+
-- macOS 10.15+
-
-### Scripts disponibles
-
-```bash
-npm start        # Ejecutar en modo desarrollo
-npm run dev      # Ejecutar con DevTools abierto
-npm run icons    # Regenerar iconos desde SVG
-npm run build    # Compilar app (.dmg y .zip)
-```
-
-### Estructura del proyecto
-
-```
-notepadmacos/
-├── main.js          # Proceso principal de Electron
-├── preload.js       # Bridge entre main y renderer
-├── renderer.html    # Interfaz de usuario
-├── renderer.js      # Lógica de la interfaz
-├── styles.css       # Estilos
-├── assets/
-│   ├── icon.svg     # Icono fuente
-│   ├── icon.png     # Icono generado
-│   └── icon.iconset/# Iconos para macOS
-└── package.json     # Configuración del proyecto
-```
-
-## Licencia
+## 📄 License
 
 MIT © [Martín Santos](https://github.com/martinsantos)
 
 ---
 
 <p align="center">
-  Hecho con ❤️ para macOS
+  <strong>⭐ Star this repo if you find it useful!</strong>
+</p>
+
+<p align="center">
+  Made with ❤️ for the Mac community
+</p>
+
+<p align="center">
+  <sub>Keywords: notepad mac, notepad macos, notepad for mac, simple text editor mac, lightweight text editor macos, plain text editor mac, windows notepad alternative mac, fast text editor macos, minimal text editor mac, notepad replacement macos</sub>
 </p>
