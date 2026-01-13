@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <title>Notepad</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Titlebar with traffic lights space and menu -->
+    <div class="titlebar">
+        <div class="titlebar-drag"></div>
+        <div class="menu-bar">
+            <div class="menu-item" data-menu="archivo">
+                <span class="menu-label">Archivo</span>
+                <div class="menu-dropdown" id="menu-archivo">
+                    <div class="menu-option" data-action="new">Nuevo <span class="shortcut">⌘N</span></div>
+                    <div class="menu-option" data-action="new-tab">Nueva pestaña <span class="shortcut">⌘T</span></div>
+                    <div class="menu-separator"></div>
+                    <div class="menu-option" data-action="open">Abrir... <span class="shortcut">⌘O</span></div>
+                    <div class="menu-submenu-container">
+                        <div class="menu-option has-submenu">📌 Fijados</div>
+                        <div class="menu-submenu" id="pinned-submenu">
+                            <div class="menu-empty">No hay archivos fijados</div>
+                        </div>
+                    </div>
+                    <div class="menu-submenu-container">
+                        <div class="menu-option has-submenu">Recientes</div>
+                        <div class="menu-submenu" id="recent-submenu">
+                            <div class="menu-empty">No hay archivos recientes</div>
+                        </div>
+                    </div>
+                    <div class="menu-separator"></div>
+                    <div class="menu-option" data-action="save">Guardar <span class="shortcut">⌘G</span></div>
+                    <div class="menu-option" data-action="save-as">Guardar como... <span class="shortcut">⇧⌘G</span></div>
+                    <div class="menu-separator"></div>
+                    <div class="menu-option" data-action="pin-current">📌 Fijar archivo actual</div>
+                    <div class="menu-option" data-action="show-in-folder">Mostrar en Finder</div>
+                    <div class="menu-separator"></div>
+                    <div class="menu-option" data-action="close-tab">Cerrar pestaña <span class="shortcut">⌘W</span></div>
+                </div>
+            </div>
+            <div class="menu-item" data-menu="editar">
+                <span class="menu-label">Editar</span>
+                <div class="menu-dropdown" id="menu-editar">
+                    <div class="menu-option" data-action="undo">Deshacer <span class="shortcut">⌘Z</span></div>
+                    <div class="menu-option" data-action="redo">Rehacer <span class="shortcut">⇧⌘Z</span></div>
+                    <div class="menu-separator"></div>
+                    <div class="menu-option" data-action="cut">Cortar <span class="shortcut">⌘X</span></div>
+                    <div class="menu-option" data-action="copy">Copiar <span class="shortcut">⌘C</span></div>
+                    <div class="menu-option" data-action="paste">Pegar <span class="shortcut">⌘V</span></div>
+                    <div class="menu-option" data-action="select-all">Seleccionar todo <span class="shortcut">⌘A</span></div>
+                    <div class="menu-separator"></div>
+                    <div class="menu-option" data-action="find">Buscar... <span class="shortcut">⌘F</span></div>
+                    <div class="menu-option" data-action="replace">Reemplazar... <span class="shortcut">⌘H</span></div>
+                </div>
+            </div>
+            <div class="menu-item" data-menu="historial">
+                <span class="menu-label">Historial</span>
+                <div class="menu-dropdown" id="menu-historial">
+                    <div class="menu-option" data-action="show-history">Ver historial <span class="shortcut">⌘Y</span></div>
+                    <div class="menu-option" data-action="export-history">Exportar historial</div>
+                    <div class="menu-separator"></div>
+                    <div class="menu-option" data-action="clear-history">Limpiar historial</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-bar">
+        <div class="tabs-container" id="tabs-container"></div>
+        <div class="new-tab-btn" id="new-tab-btn" title="Nueva pestaña (⌘T)">+</div>
+    </div>
+
+    <div class="editor-container" id="editor-container"></div>
+
+    <div class="status-bar">
+        <div class="status-left">
+            <div class="status-item">
+                <span class="status-label">Líneas:</span>
+                <span id="line-count">1</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Palabras:</span>
+                <span id="word-count">0</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Caracteres:</span>
+                <span id="char-count">0</span>
+            </div>
+        </div>
+        <div class="status-right">
+            <span class="autosave-indicator" id="autosave-status">✓ Guardado</span>
+            <span class="modified-indicator" id="modified">● Modificado</span>
+        </div>
+    </div>
+
+    <!-- History Panel -->
+    <div class="history-panel" id="history-panel">
+        <div class="history-header">
+            <h3>Historial de cambios</h3>
+            <span class="history-close" id="history-close">×</span>
+        </div>
+        <div class="history-list" id="history-list"></div>
+        <div class="history-actions">
+            <button class="history-btn secondary" id="history-cancel">Cancelar</button>
+            <button class="history-btn primary" id="history-restore">Restaurar</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
