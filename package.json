@@ -1,7 +1,7 @@
 {
   "name": "notepad-macos",
-  "version": "1.0.0",
-  "description": "A lightweight, fast text editor for macOS. Simple Notepad alternative with tabs, pinned files, version history and auto-save.",
+  "version": "1.1.0",
+  "description": "A lightweight, fast text editor for macOS with rich text formatting. Simple Notepad alternative with tabs, pinned files, version history, auto-save, and text formatting (bold, italic, underline, colors).",
   "main": "main.js",
   "homepage": "https://github.com/martinsantos/notepadmacos",
   "repository": {
@@ -18,7 +18,11 @@
     "editor",
     "lightweight",
     "simple",
-    "plain-text",
+    "rich-text",
+    "formatting",
+    "bold",
+    "italic",
+    "underline",
     "electron",
     "mac",
     "osx",
