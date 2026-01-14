@@ -945,6 +945,81 @@ document.querySelector('.tab-bar').addEventListener('dblclick', (e) => {
     }
 });
 
+// Context menu for editor (right-click)
+document.getElementById('editor-container').addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+
+    // Remove existing context menu
+    const existingMenu = document.querySelector('.context-menu');
+    if (existingMenu) existingMenu.remove();
+
+    const menu = document.createElement('div');
+    menu.className = 'context-menu';
+    menu.innerHTML = `
+        <div class="context-option" data-action="cut">Cortar</div>
+        <div class="context-option" data-action="copy">Copiar</div>
+        <div class="context-option" data-action="paste">Pegar</div>
+        <div class="context-separator"></div>
+        <div class="context-option" data-action="bold">Negrita</div>
+        <div class="context-option" data-action="italic">Cursiva</div>
+        <div class="context-option" data-action="underline">Subrayado</div>
+        <div class="context-separator"></div>
+        <div class="context-option" data-action="select-all">Seleccionar todo</div>
+    `;
+
+    menu.style.left = e.clientX + 'px';
+    menu.style.top = e.clientY + 'px';
+    document.body.appendChild(menu);
+
+    // Handle menu clicks
+    menu.querySelectorAll('.context-option').forEach(option => {
+        option.addEventListener('click', () => {
+            const action = option.dataset.action;
+            const editor = getActiveEditor();
+
+            switch (action) {
+                case 'cut':
+                    document.execCommand('cut');
+                    break;
+                case 'copy':
+                    document.execCommand('copy');
+                    break;
+                case 'paste':
+                    document.execCommand('paste');
+                    break;
+                case 'bold':
+                    toggleBold();
+                    break;
+                case 'italic':
+                    toggleItalic();
+                    break;
+                case 'underline':
+                    toggleUnderline();
+                    break;
+                case 'select-all':
+                    if (editor) {
+                        const range = document.createRange();
+                        range.selectNodeContents(editor);
+                        const selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
+                    break;
+            }
+            menu.remove();
+        });
+    });
+
+    // Close menu on click outside
+    const closeMenu = (e) => {
+        if (!menu.contains(e.target)) {
+            menu.remove();
+            document.removeEventListener('click', closeMenu);
+        }
+    };
+    setTimeout(() => document.addEventListener('click', closeMenu), 0);
+});
+
 // ============ INIT ============
 loadHistory();
 if (!loadSession()) {
