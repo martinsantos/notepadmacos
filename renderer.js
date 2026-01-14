@@ -936,6 +936,15 @@ document.getElementById('history-close').onclick = hideHistory;
 document.getElementById('history-cancel').onclick = hideHistory;
 document.getElementById('history-restore').onclick = restoreSelected;
 
+// Double-click on tab bar to create new tab
+document.querySelector('.tab-bar').addEventListener('dblclick', (e) => {
+    // Only trigger if clicking on empty area (not on tabs or buttons)
+    if (e.target.classList.contains('tab-bar') ||
+        e.target.classList.contains('tabs-container')) {
+        newTab();
+    }
+});
+
 // ============ INIT ============
 loadHistory();
 if (!loadSession()) {
